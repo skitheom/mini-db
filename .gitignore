@@ -39,3 +39,19 @@
 
 # debug information files
 *.dwo
+
+# build
+/objs/
+/mini_db
+
+# runtime
+/.server.pid
+/.server.out
+
+# editor
+.vscode/
+.DS_Store
+
+# other
+SUBJECT.md
+.save
