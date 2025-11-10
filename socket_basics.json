@@ -1,0 +1,55 @@
+{
+  "deck": "Networking (Mini-DB exam)",
+  "model": "Basic",
+  "tags": [
+    "mini-db",
+    "socket",
+    "cpp"
+  ],
+  "cards": [
+    {
+      "front": "socket() の3引数を指定して IPv4/TCP ソケットを作るには？",
+      "back": "`socket(AF_INET, SOCK_STREAM, 0)`\n（AF_INET: IPv4 / SOCK_STREAM: TCP / 0: デフォルトプロトコル）"
+    },
+    {
+      "front": "fcntl() を使って FD_CLOEXEC フラグを設定する流れは？",
+      "back": "`fcntl(fd, F_GETFD)` で取得 → `fcntl(fd, F_SETFD, flags | FD_CLOEXEC)` で設定。子プロセスへのFD漏れ防止。"
+    },
+    {
+      "front": "setsockopt() で bind の \"Address already in use\" を避けるには？",
+      "back": "`setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes));`"
+    },
+    {
+      "front": "bind() 時に IPv4/127.0.0.1 固定でポート番号を指定するには？",
+      "back": "`addr.sin_family = AF_INET;`<br>`addr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);`<br>`addr.sin_port = htons(port);`"
+    },
+    {
+      "front": "listen() の第二引数 backlog に指定する意味は？",
+      "back": "接続待ちキューの長さ。mini-db なら `listen(fd, 16)` 程度で十分。"
+    },
+    {
+      "front": "accept() が EINTR で失敗した場合、どうすべき？",
+      "back": "シグナル割り込みによる一時的なエラーなので、ループして再試行する。"
+    },
+    {
+      "front": "FD_CLOEXEC は何の略？何のため？",
+      "back": "File Descriptor Close-on-Exec。`exec()` で子プロセスにFDを引き継がないためのフラグ。"
+    },
+    {
+      "front": "SO_REUSEADDR オプションの目的は？",
+      "back": "サーバ再起動時などに TIME_WAIT 中でも同じポートで bind できるようにする。"
+    },
+    {
+      "front": "htonl / htons の違いは？",
+      "back": "`htonl` は32bit（long）値をネットワークバイト順に、`htons` は16bit（short）値を変換する。"
+    },
+    {
+      "front": "make_listen() の基本的な処理手順を順に書け。",
+      "back": "`socket()` → `setsockopt()` → `bind()` → `listen()` → `return fd;`"
+    },
+    {
+      "front": "`std::exchange(x, -1)` はなにをする？",
+      "back": "変数 x の現在の値を返しつつ、x に -1 を代入する。\n例: 所有権を移した後に元オブジェクトを無効化するのに使う。\n#include <utility>"
+    }
+  ]
+}
