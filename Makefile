@@ -1,6 +1,6 @@
 NAME     := mini_db
 CXX      := c++            # or clang++
-CXXFLAGS := -std=c++17 -Wall -Wextra -Werror -O0 -g -MMD -MP
+CXXFLAGS := -std=c++11 -Wall -Wextra -Werror -O0 -g -MMD -MP
 SRCDIR   := srcs
 OBJDIR   := objs
 INCLUDES := -I./includes
