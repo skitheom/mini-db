@@ -10,11 +10,19 @@ KVStore::~KVStore() {}
 
 void KVStore::load_file(const std::string &path) {
   std::ifstream in(path.c_str());
-  if (!in)
+  if (!in) {
     return;
+  }
+  std::string line;
+  while (std::getline(in, line)) {
+    if (line.empty())
+      continue;
 
-  std::string k, v;
-  while (in >> k >> v) {
+    std::istringstream iss(line);
+    std::string k, v, extra;
+    if (!(iss >> k >> v) || (iss >> extra)) {
+      continue;
+    }
     post(k, v);
   }
 }
